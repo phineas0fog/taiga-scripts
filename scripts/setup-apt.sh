@@ -42,8 +42,7 @@ function get-distro {
 	*)
 	    echo "[ERROR] unsupported distribution... exiting"
 	    exit 1
-	    ;;
-
+	    
 	echo "[INFO] detected linux distribution: \"$distro\", using \"$cmd\" for package installation"
     esac
 }
@@ -105,7 +104,6 @@ function package-not-installed {
 	*)
 	    echo "[ERROR] unsupported distribution... exiting"
 	    exit 1
-	    ;;
 
 	echo "[INFO] detected linux distribution: \"$distro\", using \"$cmd\" for packages updates"
 	$cmd
@@ -151,7 +149,6 @@ function update-packages {
 	*)
 	    echo "[ERROR] unsupported distribution... exiting"
 	    exit 1
-	    ;;
 
 	echo "[INFO] detected linux distribution: \"$distro\", using \"$cmd\" for packages updates"
 	$cmd
