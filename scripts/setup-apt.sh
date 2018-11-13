@@ -8,7 +8,7 @@ function get-distro {
     cmd=""
     case "$distro" in
 	"arch")
-	    pacman -v > /dev/null
+	    pacman --version > /dev/null
 	    if [ $? == 0 ]; then
 		cmd="pacman -S --noconfirm "
 	    else
@@ -16,7 +16,7 @@ function get-distro {
 	    fi
 	    ;;
 	"debian" | "ubuntu")
-	    apt-get -v > /dev/null
+	    apt-get --version > /dev/null
 	    if [ $? == 0 ]; then
 		cmd="apt-get install -y "
 	    else
@@ -24,7 +24,7 @@ function get-distro {
 	    fi
 	    ;;
 	"centos")
-	    yum -v > /dev/null
+	    yum --version > /dev/null
 	    if [ $? == 0 ]; then
 		cmd="yum install -y "
 	    else
@@ -32,7 +32,7 @@ function get-distro {
 	    fi
 	    ;;
 	"fedora")
-	    dnf -v > /dev/null
+	    dnf --version > /dev/null
 	    if [ $? == 0 ]; then
 		cmd="dnf install -y "
 	    else
@@ -42,9 +42,9 @@ function get-distro {
 	*)
 	    echo "[ERROR] unsupported distribution... exiting"
 	    exit 1
-	    
-	echo "[INFO] detected linux distribution: \"$distro\", using \"$cmd\" for package installation"
     esac
+    
+    echo "[INFO] detected linux distribution: \"$distro\", using \"$cmd\" for package installation"
 }
 
 function apt-install {
@@ -70,7 +70,7 @@ function package-not-installed {
     cmd=""
     case "$distro" in
 	"arch")
-	    pacman -v > /dev/null
+	    pacman --version > /dev/null
 	    if [ $? == 0 ]; then
 		sudo pacman -Qi $1
 	    else
@@ -78,7 +78,7 @@ function package-not-installed {
 	    fi
 	    ;;
 	"debian" | "ubuntu")
-	    apt-get -v > /dev/null
+	    apt-get --version > /dev/null
 	    if [ $? == 0 ]; then
 		sudo dpkg -s $1 2> /dev/null | grep Status
 	    else
@@ -86,7 +86,7 @@ function package-not-installed {
 	    fi
 	    ;;
 	"centos")
-	    yum -v > /dev/null
+	    yum --version > /dev/null
 	    if [ $? == 0 ]; then
 		sudo yum list installed $1
 	    else
@@ -94,7 +94,7 @@ function package-not-installed {
 	    fi
 	    ;;
 	"fedora")
-	    dnf -v > /dev/null
+	    dnf --version > /dev/null
 	    if [ $? == 0 ]; then
 		sudo dnf list installed $1
 	    else
@@ -104,10 +104,10 @@ function package-not-installed {
 	*)
 	    echo "[ERROR] unsupported distribution... exiting"
 	    exit 1
-
-	echo "[INFO] detected linux distribution: \"$distro\", using \"$cmd\" for packages updates"
-	$cmd
     esac    
+
+    echo "[INFO] detected linux distribution: \"$distro\", using \"$cmd\" for packages updates"
+    $cmd
 }
 
 function update-packages {
@@ -115,7 +115,7 @@ function update-packages {
     cmd=""
     case "$distro" in
 	"arch")
-	    pacman -v > /dev/null
+	    pacman --version > /dev/null
 	    if [ $? == 0 ]; then
 		cmd="pacman -Syyu --noconfirm"
 	    else
@@ -123,7 +123,7 @@ function update-packages {
 	    fi
 	    ;;
 	"debian" | "ubuntu")
-	    apt-get -v > /dev/null
+	    apt-get --version > /dev/null
 	    if [ $? == 0 ]; then
 		cmd="apt-get update -y; apt-get upgrade -y"
 	    else
@@ -131,7 +131,7 @@ function update-packages {
 	    fi
 	    ;;
 	"centos")
-	    yum -v > /dev/null
+	    yum --version > /dev/null
 	    if [ $? == 0 ]; then
 		cmd="yum update -y "
 	    else
@@ -139,7 +139,7 @@ function update-packages {
 	    fi
 	    ;;
 	"fedora")
-	    dnf -v > /dev/null
+	    dnf --version > /dev/null
 	    if [ $? == 0 ]; then
 		cmd="dnf update -y "
 	    else
@@ -149,10 +149,10 @@ function update-packages {
 	*)
 	    echo "[ERROR] unsupported distribution... exiting"
 	    exit 1
-
-	echo "[INFO] detected linux distribution: \"$distro\", using \"$cmd\" for packages updates"
-	$cmd
     esac
+
+    echo "[INFO] detected linux distribution: \"$distro\", using \"$cmd\" for packages updates"
+    sudo $cmd
 }
 
-sudo update-packages()
+update-packages
