@@ -155,4 +155,4 @@ function update-packages {
     esac
 }
 
-sudo update-packages
+sudo update-packages()
